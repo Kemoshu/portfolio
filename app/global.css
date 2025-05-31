@@ -16,7 +16,7 @@
   --sh-property: #e25a1c;
   --sh-entity: #e25a1c;
 }
-
+  
 @media (prefers-color-scheme: dark) {
   :root {
     --sh-class: #4c97f8;
