@@ -29,7 +29,7 @@ export function ProjectsList() {
 
             {/* Optional tech stack line */}
             {project.metadata.tech && (
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 md:pl-[80px]">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400 ml-[88px]">
                 {project.metadata.tech}
               </p>
             )}
