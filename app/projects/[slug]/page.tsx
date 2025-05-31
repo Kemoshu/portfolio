@@ -1,19 +1,28 @@
+// app/projects/[slug]/page.tsx
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import ReactMarkdown from 'react-markdown'
 import { getProjects } from 'app/projects/utils'
 
-/* ───────── 1.  Pre-render every project slug ───────── */
+/* ------------------------------------------------------------
+ * 0. Canonical prop type for this route
+ * ---------------------------------------------------------- */
+type Props = {
+  params: { slug: string }
+  searchParams?: Record<string, string | string[] | undefined>
+}
+
+/* ------------------------------------------------------------
+ * 1.  Pre-render every slug
+ * ---------------------------------------------------------- */
 export async function generateStaticParams() {
   return getProjects().map((p) => ({ slug: p.slug }))
 }
 
-/* ───────── 2.  Page-level <head> metadata ──────────── */
-export async function generateMetadata({
-  params,           // <-- let Next infer the type
-}: {
-  params: { slug: string }
-}): Promise<Metadata> {
+/* ------------------------------------------------------------
+ * 2.  Page <HEAD> metadata
+ * ---------------------------------------------------------- */
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjects().find((p) => p.slug === params.slug)
   if (!project) return {}
 
@@ -28,12 +37,10 @@ export async function generateMetadata({
   }
 }
 
-/* ───────── 3.  Page component — no explicit PageProps ───────── */
-export default async function ProjectPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
+/* ------------------------------------------------------------
+ * 3.  Page component
+ * ---------------------------------------------------------- */
+export default async function ProjectPage({ params }: Props) {
   const project = getProjects().find((p) => p.slug === params.slug)
   if (!project) notFound()
 
@@ -42,8 +49,8 @@ export default async function ProjectPage({
       <h1>{project.metadata.title}</h1>
       <p className="text-neutral-500 mb-6">{project.metadata.summary}</p>
 
-      {/* Render the Markdown / MDX body */}
       <ReactMarkdown>{project.content}</ReactMarkdown>
     </article>
   )
 }
+
