@@ -1,5 +1,4 @@
-// app/page.tsx
-import { ProjectsList } from 'app/components/projects'
+import GitHubProjects from 'app/components/GitHubProjects'
 import Skills from 'app/components/Skills'
 
 export default function HomePage() {
@@ -39,7 +38,7 @@ export default function HomePage() {
           <p className="mb-6 text-lg leading-relaxed">
             {`Here are some of my notable projects:`}
           </p>
-           <ProjectsList />
+           <GitHubProjects />
         </section>
         <br />
         <section>

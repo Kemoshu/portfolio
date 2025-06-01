@@ -1,15 +1,10 @@
-import { ProjectsList } from 'app/components/projects'
-
-export const metadata = {
-  title: 'Projects',
-  description: 'Selected personal and academic projects.',
-}
+import GitHubProjects from 'app/components/GitHubProjects'
 
 export default function ProjectsPage() {
   return (
-    <section>
-      <h1 className="mb-8 text-3xl font-bold tracking-tight">Projects</h1>
-      <ProjectsList />
-    </section>
+    <div>
+      <h1 className="text-2xl font-bold mb-4">GitHub Projects</h1>
+      <GitHubProjects />
+    </div>
   )
 }
